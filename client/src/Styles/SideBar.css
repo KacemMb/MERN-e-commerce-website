@@ -1,0 +1,73 @@
+.SideBar{
+    height: 100vh;
+    width: 18.5%;
+    background-color: #160C34;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+    scrollbar-color: #56468b #160C34;
+    scrollbar-width: thin;
+}
+
+
+.Managment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: unset;
+    width: 100%;
+}
+
+.Managment_Section{
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.Managment_Section hr{
+    width: 95%;
+    margin: 0 auto;
+    border: 1px solid #888787;
+
+}
+
+.Managment_Section ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.Managment_Section ul li{
+    padding: 10px 28px;
+    border-bottom: 1px solid #2E2E2E;
+    cursor: pointer;
+    text-align: left;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.Managment_Section ul li img{
+    margin-right: 10px;
+    width: 30px;
+}
+.Managment_Section ul li:hover{
+    background-color: #271f41;
+}
+.Profile{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 28px;
+    border-top: 1px solid #2E2E2E;
+    border-bottom: 1px solid #2E2E2E;
+}
+
+.Profile:hover{
+    background-color: #271f41;
+    cursor: pointer;
+}
