@@ -13,7 +13,7 @@ const AddProduct = () => {
   const [origin, setOrigin] = useState('');
   const [showProduct, setShowProduct] = useState(false);
   const [productData, setProductData] = useState({});
-  
+ //Handler for updating state based on input field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
@@ -39,10 +39,11 @@ const AddProduct = () => {
         break;
     }
   };
-
+//Handler for updating the state when the image is selected
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
+//Handler for showing the ProductProto
   const handleShowProduct = () => {
     if (name && description && quantity && price &&  category && origin )
     {
@@ -52,6 +53,7 @@ const AddProduct = () => {
       alert('Please fill in all fields');
     }
   };
+  //Handler for adding the product by sending a POST request to the server
   const handleAddProduct = () => {
     if (productData) {
       axios.post('http://localhost:3001/api/AddProduct/', productData) .then((response) => {
