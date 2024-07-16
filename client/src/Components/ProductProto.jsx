@@ -1,12 +1,15 @@
 import React from 'react'
 
-const ProductProto = () => {
+const ProductProto = ({ productData }) => {
+  const { productName, productDescription, quantity, price, category, origin, image } = productData;
   return (
     <div className='ProductProto'>
-      <img src="./Images/ImageBg.png" alt="" />
+      {image && (
+        <img src={URL.createObjectURL(image)} alt={productName} />
+      )}
       <div className='ProduProtoNamePrice'>
-        <h3>Product Name</h3>
-        <p>15 dt</p>
+        <h3>{productName}</h3>
+        <p> {price} DT</p>
       </div>
       <div className="ProdRate">
         
