@@ -50,6 +50,8 @@
     display: flex;
     align-items: center;
     font-weight: 500;
+    text-decoration: none;
+    color: white;
 }
 .Managment_Section ul li img{
     margin-right: 10px;
@@ -70,4 +72,7 @@
 .Profile:hover{
     background-color: #271f41;
     cursor: pointer;
+}
+.SideLink{
+    text-decoration: none;
 }
