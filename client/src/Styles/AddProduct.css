@@ -58,12 +58,14 @@
 
 .Form1 input[type="file"]{
     margin-top: 10px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #CBD2E5;
     outline: none;
-    font-size: 1.5em;
+    font-size: 1.1em;
     color: #6b6c6e;
+    display: flex;
+    align-items: center;
 }
 
 .Form1 button{
