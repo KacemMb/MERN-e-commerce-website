@@ -1,11 +1,11 @@
 import express from 'express'
-import { signup ,login, logout, UpdateUser} from '../controller/User.controller.js'
+import { signup, login, logout, UpdateUser } from '../Controllers/User.controller.js'
 
 const UserRoute = express.Router()
 
- router.post('/signup',signup)
- router.post('/login', login)
- router.post('/logout',logout)
- router.post('/update',UpdateUser)
+ UserRoute.post('/signup',signup)
+ UserRoute.post('/login', login)
+ UserRoute.post('/logout',logout)
+ UserRoute.post('/update',UpdateUser)
 
 export default UserRoute

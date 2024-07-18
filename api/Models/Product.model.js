@@ -11,6 +11,10 @@ const ProductSchema = new mongoose.Schema({
     price:{
         type: Number,
         required: true
+    },
+    finalPrice:{
+        type: Number,
+        default: 0
     },  
     image:{
         type: String,
@@ -27,8 +31,11 @@ const ProductSchema = new mongoose.Schema({
     origin:{
           type: String,
         default: 'Unknown'
+    },
+    solde:{
+        type: Number,
+        default: 0
     }
-    
 });
 const Product = mongoose.model('Product', ProductSchema)
 export default Product

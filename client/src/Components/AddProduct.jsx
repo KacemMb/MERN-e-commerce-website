@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useState } from "react";
 import toast from 'react-hot-toast';
 const AddProduct = () => {
+
+  // Product data state 
   const [productData, setProductData] = useState({
     name: '',
     description: '',
@@ -13,22 +15,28 @@ const AddProduct = () => {
     solde: 0,
     category: 'unknown',
     origin: 'unknown',
-    image: null,
+    image: "null",
   });
+
+  // state for test if the form is valid
   const [isValidate, setIsValidate] = useState(false);
+
+  // state for show the product
   const [showProduct, setShowProduct] = useState(false);
+
+  //handler for adding the product data
   const handleChange = (e) => {
     setProductData({ ...productData, [e.target.name]: e.target.value });
   }
 
+  //Handler for adding the product image
   const handleImageChange = (e) => {
     setProductData({ ...productData, image: e.target.files[0] });
   }
   
 //Handler for showing the ProductProto
   const handleShowProduct = () => {
-    const { name, description, quantity, price, category, origin, image } = productData;
-    console.log("name",name,"description",description,"quantity",quantity,"price",price,"category",category,"origin",origin,"image",image);
+    const { name, description, quantity, price, category, origin, } = productData;
     if (name && description && quantity && price &&  category && origin )
     {
       setShowProduct(true);
@@ -38,21 +46,22 @@ const AddProduct = () => {
       setIsValidate(false);
     }
   };
-  //Handler for adding the product by sending a POST request to the server
-  const handleAddProduct = () => {
-    if (productData) {
-      axios.post('http://localhost:3001/api/AddProduct/', productData) .then((response) => {
-          console.log(response);
-          toast.success('Product added successfully');
-        })
-       .catch((error) => {
-          console.error(error);
-          toast.error('Error adding product');
-        });
-    } else {
-      alert('Please fill in all fields');
+
+  const sendProduct = async () => {
+    try {
+      console.log("product data : ",productData);
+      const res = await axios.post('http://localhost:2024/api/product/AddProduct', productData);
+      if(res.status === 201){
+        toast.success('Product added successfully');
+      }
+      
+    } catch (error) {
+      console.error("error in sending data",error);
     }
-  };
+  }
+  const handleAddProduct = () => {
+    sendProduct();
+  }
   return (
     <div className='AddProduct'>
         <div className='AddProductForm'>

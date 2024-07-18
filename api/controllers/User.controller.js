@@ -1,6 +1,6 @@
-import User from "../models/User.model.js"
+import User from "../Models/User.model.js"
 import bcryptjs from "bcryptjs"
-import { errorHandler } from "../utils/error.js"
+import {ErrorHandler} from "../Utils/ErrorHandler.js"
 import  jwt  from "jsonwebtoken"
 import sharp from "sharp"
 export const signup = async (req, res,next) => {
@@ -13,7 +13,7 @@ export const signup = async (req, res,next) => {
         const hashedPassword = await bcryptjs.hash(password, 10);
         const newuser = new User({ full_name,email, password: hashedPassword });
         if(newuser.role=="admin"){
-            next(errorHandler(403,"you can't create an admin account"))
+            next(ErrorHandler(403,"you can't create an admin account"))
         }
         await newuser.save();
         res.status(201).json({ message: 'User registered successfully' });
