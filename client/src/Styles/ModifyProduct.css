@@ -1,0 +1,113 @@
+.ModifyProduct{
+    background-color: #CBD2E5;
+    height: 100vh;
+    width: 81.5%;
+    display: flex;
+}
+.ModifyProductForm{
+    display: flex;
+    background-color: white;
+    width: 40%;
+    height: 98vh;
+    margin-top: 1vh;
+    margin-left: .5%;
+    padding: 15px;
+}
+.Form1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 15px;
+    overflow-y: hidden;
+}
+
+.Form1 input{
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #CBD2E5;
+    outline: none;
+    font-size: 1.5em;
+}
+
+.Form1 input:focus{
+    border: 1px solid #3F72AF;
+    box-shadow: 0 0 5px #3F72AF;
+}
+
+.Form1 textarea {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #CBD2E5;
+    outline: none;
+    font-size: 1.5em;
+}
+
+.Form1 textarea:focus{
+    border: 1px solid #3F72AF;
+    box-shadow: 0 0 5px #3F72AF;
+}
+.Form1 p{
+    text-align: left;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    font-size: 1.1em;
+    color: #6b6c6e;
+}
+
+.Form1 input[type="file"]{
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CBD2E5;
+    outline: none;
+    font-size: 1.1em;
+    color: #6b6c6e;
+    display: flex;
+    align-items: center;
+}
+
+.Form1 button{
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #CBD2E5;
+    outline: none;
+    font-size: 1.5em;
+    background-color: #3F72AF;
+    color: white;
+    cursor: pointer;
+}
+
+.Show_Product{
+    display: flex;
+    flex-direction: column;
+    width: 58.5%;
+    height: 98vh;
+    margin-top: 1vh;
+    margin-left: .5%;
+    padding: 15px;
+    overflow-y: hidden;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProductProto{
+    display: flex;
+    flex-direction: column;
+    height: 450px;
+    width: 380px;
+    box-shadow: 0 0 15px #272626;
+    background-color: #D9D9D9;
+}
+.ProduProtoNamePrice{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: black;
+    font-size: 1.5em;
+    font-weight: 500;
+}
