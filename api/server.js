@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import Product_route from './Routes/Product.route.js';
+import UserRoute from './Routes/User.route.js';
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ conn.once('open', () => {
   console.log('connected to the database');
 })
 app.use('/api',Product_route)
+app.use('/api/user',UserRoute)
 app.listen(port, () => {
   console.log(`server running on port ${port}` );
 });
