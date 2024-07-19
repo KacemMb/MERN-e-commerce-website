@@ -1,6 +1,5 @@
 import User from "../Models/User.model.js"
 import bcryptjs from "bcryptjs"
-import {ErrorHandler} from "../Utils/ErrorHandler.js"
 import  jwt  from "jsonwebtoken"
 import sharp from "sharp"
 export const signup = async (req, res,next) => {
@@ -26,11 +25,11 @@ next(error)
         try {
             const user =await User.findOne({email})
             if(!user){
-                return next(errorHandler(404,"User not found"))
+                return next(ErrorHandler(404,"User not found"))
             }
             const validPassword = bcryptjs.compareSync(password,user.password)
             if(!validPassword){
-                return next(errorHandler(400,"Invalid credentials"))
+                return next(ErrorHandler(400,"Invalid credentials"))
             }
             const token=jwt.sign(
                 {id:user._id},
