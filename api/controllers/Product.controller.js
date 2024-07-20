@@ -28,7 +28,7 @@ export const AddProduct = async (req, res, next) => {
 
         // Compress the image using sharp
         const compressedImageName = `${req.file.originalname.split('.')[0]}-compressed.jpeg`;
-        const compressedImagePath = path.join( 'client', 'public', 'images', compressedImageName);
+        const compressedImagePath = path.join( 'images', compressedImageName);
 
         await sharp(imageBuffer)
             .resize(500, 500)
@@ -73,7 +73,7 @@ export const ModifyProduct = async (req, res, next) => {
         // Compress the image before saving
         if (image) {
             const compressedImageName = `${image.originalname.split('.')[0]}-compressed.jpeg`;
-            const compressedImagePath = path.join('client', 'public', 'images', compressedImageName);
+            const compressedImagePath = path.join( 'images', compressedImageName);
 
             await sharp(image.buffer)
                 .resize(500, 500)
