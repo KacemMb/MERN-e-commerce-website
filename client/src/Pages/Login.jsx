@@ -9,7 +9,8 @@ const Login = () => {
   };
 
   return (
-    <div className={`content justify-content-center align-items-center d-flex shadow-lg ${isActive ? 'active' : ''}`} id='content'>
+    <div className='cont'>
+        <div className={`content justify-content-center align-items-center d-flex shadow-lg ${isActive ? 'active' : ''}`} id='content'>
       {/*----Register form-----*/}
       <form>
         <div className='col-md-6 d-flex flex-column justify-content-center'>
@@ -75,6 +76,8 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </div>
+   
   );
 };
 
