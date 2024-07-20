@@ -50,8 +50,11 @@ const AddProduct = () => {
   const sendProduct = async () => {
     try {
       console.log("product data : ",productData);
-      const res = await axios.post('http://localhost:2024/api/product/AddProduct', productData);
-      if(res.status === 201){
+      const res = await axios.post('http://localhost:2024/api/product/AddProduct', productData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });      if(res.status === 201){
         toast.success('Product added successfully');
       }
       
