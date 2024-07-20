@@ -3,16 +3,21 @@
     height: 100vh;
     width: 81.5%;
     display: flex;
+    overflow-y: scroll;
 }
 .product-table {
-    width: 100%;
+    width: 99%;
     border-collapse: collapse;
+    height: 98%;
+    margin: 0.5%;
+    overflow: hidden;
   }
   
   .product-table th, .product-table td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align: center;
+    font-size: 1.3rem;
   }
   
   .product-table th, .product-table tr {
@@ -22,30 +27,47 @@
     background-color: #fff;
   }
   .modify-button {
-    background-color: #4CAF50; 
+    background-color: #5DADE2; 
     border: none;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 18px;
     margin-right:10px;
     margin-left: 10px;
     cursor: pointer;
     border-radius: 5px;
+    width: 40%;
+    font-weight: 600;
   }
-  
+  .modify-button:hover {
+    background-color: #3498DB;
+  }
+  .delete-button:hover {
+    background-color: #C0392B;
+  }
   .delete-button {
-    background-color: #f44336; 
+    background-color: #E74C3C; 
     border: none;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 18px;
     cursor: pointer;
     border-radius: 5px;
+    width: 40%;
+    font-weight: 600;
   }
   
+  .product-table th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .product-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }

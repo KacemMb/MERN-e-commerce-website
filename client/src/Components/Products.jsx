@@ -30,7 +30,7 @@ const Products = ({products}) => {
             <td>{product.origin}</td>
             <td>{product.category}</td>
             <td>
-               <Link to={`/modify/${product.id}`}>
+               <Link to={`/admin/update`}>
                   <button className="modify-button">Modify</button>
                 </Link>
               <button className="delete-button">Delete</button>
