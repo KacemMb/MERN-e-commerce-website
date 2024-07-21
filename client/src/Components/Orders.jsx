@@ -5,103 +5,33 @@ import '../Styles/Orders.css';
 const orders = [
   {
     id: 1,
+    name: "John Doe",
     date: "2022-01-01",
     total: 100.00,
     status: "Pending",
-    products: [
-      { id: 1, name: "Product 1", quantity: 2, price: 50.00 },
-      { id: 2, name: "Product 2", quantity: 1, price: 20.00 }
-    ],
-    shippingAddress: {
-      name: "John Doe",
-      address: "123 Main St",
-      city: "Anytown",
-      state: "CA",
-      zip: "12345"
-    },
-    billingAddress: {
-      name: "John Doe",
-      address: "123 Main St",
-      city: "Anytown",
-      state: "CA",
-      zip: "12345"
-    },
-    paymentMethod: "Credit Card"
   },
   {
     id: 2,
-    date: "2022-01-05",
-    total: 50.00,
-    status: "Shipped",
-    products: [
-      { id: 3, name: "Product 3", quantity: 1, price: 30.00 }
-    ],
-    shippingAddress: {
-      name: "Jane Doe",
-      address: "456 Elm St",
-      city: "Othertown",
-      state: "NY",
-      zip: "67890"
-    },
-    billingAddress: {
-      name: "Jane Doe",
-      address: "456 Elm St",
-      city: "Othertown",
-      state: "NY",
-      zip: "67890"
-    },
-    paymentMethod: "PayPal"
+    name: "John Doe",
+    date: "2022-01-01",
+    total: 100.00,
+    status: "shipped",
   },
   {
     id: 3,
-    date: "2022-01-10",
-    total: 200.00,
+    name: "John Doe",
+    date: "2022-01-01",
+    total: 100.00,
     status: "Delivered",
-    products: [
-      { id: 1, name: "Product 1", quantity: 3, price: 50.00 },
-      { id: 4, name: "Product 4", quantity: 2, price: 40.00 }
-    ],
-    shippingAddress: {
-      name: "Bob Smith",
-      address: "789 Oak St",
-      city: "Thistown",
-      state: "TX",
-      zip: "34567"
-    },
-    billingAddress: {
-      name: "Bob Smith",
-      address: "789 Oak St",
-      city: "Thistown",
-      state: "TX",
-      zip: "34567"
-    },
-    paymentMethod: "Credit Card"
   },
-  {
-    id: 4,
-    date: "2022-01-15",
-    total: 150.00,
-    status: "Cancelled",
-    products: [
-      { id: 2, name: "Product 2", quantity: 2, price: 20.00 },
-      { id: 5, name: "Product 5", quantity: 1, price: 30.00 }
-    ],
-    shippingAddress: {
-      name: "Alice Johnson",
-      address: "321 Pine St",
-      city: "That town",
-      state: "FL",
-      zip: "90123"
+  
+    {
+      id: 4,
+      name: "John Doe",
+      date: "2022-01-01",
+      total: 100.00,
+      status: "cancelled",
     },
-    billingAddress: {
-      name: "Alice Johnson",
-      address: "321 Pine St",
-      city: "That town",
-      state: "FL",
-      zip: "90123"
-    },
-    paymentMethod: "PayPal"
-  }
 ];
 
 const Orders = () => {
@@ -129,8 +59,9 @@ const Orders = () => {
           <thead>
             <tr>
               <th>Order ID</th>
-              <th>Date</th>
+              <th>Name</th>
               <th>Total</th>
+              <th>Date</th>
               <th>Status</th>
               <th>Actions</th>
             </tr>
@@ -139,8 +70,10 @@ const Orders = () => {
             {filteredOrders.map((order) => (
               <tr key={order.id}>
                 <td>{order.id}</td>
-                <td>{order.date}</td>
+                <td>{order.name}</td>
                 <td>{order.total}</td>
+                <td>{order.date}</td>
+                
                 <td className={`status ${order.status.toLowerCase()}`}>{order.status}</td>
                 <td>
                   <button className="action-btn view">View</button>
