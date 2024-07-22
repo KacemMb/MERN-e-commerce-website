@@ -8,6 +8,7 @@ import ModifyProduct from '../Components/ModifyProduct'
 import Orders from '../Components/Orders'
 import Users from '../Components/Users'
 import FeedBacks from '../Components/FeedBacks'
+import Client from '../Components/Client';
 
 const AdminDashboard = () => {
   const products = [
@@ -38,6 +39,7 @@ const AdminDashboard = () => {
         <Route path='/update' element={<ModifyProduct products={products} />} />
         <Route path='/modify/:id' element={<ModifyProduct products={products} />} />
         <Route path='/orders' element={<Orders />} />
+        <Route path='/client' element={<Client/>} />
         <Route path='/users' element={<Users />} />
         <Route path='/feedbacks' element={<FeedBacks />} />
       </Routes>
