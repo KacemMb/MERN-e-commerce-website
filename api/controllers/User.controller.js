@@ -78,6 +78,7 @@ export const UpdateUser = async (req, res, next) => {
     }
 };
 
+<<<<<<< HEAD
 
 export const createUser = async (req,res) => {
     try {
@@ -97,3 +98,14 @@ export const createUser = async (req,res) => {
         res.status(500).json({error:"Internal server error"})
     }
 }
+=======
+//show all users 
+    export const getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find({});
+        res.status(200).json(users);
+    } catch (error) {
+        next(error);
+    }
+};
+>>>>>>> 4da60b23a9884a33999ee10bc0de1f1b938733b6
