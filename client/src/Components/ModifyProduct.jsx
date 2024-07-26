@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../Styles/ModifyProduct.css';
 import { useParams } from 'react-router-dom';
-import ProductProto from './ProductProto'
 const ModifyProduct = ({products}) => {
   const { id } = useParams();
   const product = products.find((product) => product.id === parseInt(id));

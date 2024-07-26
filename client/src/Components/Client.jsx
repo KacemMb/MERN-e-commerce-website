@@ -33,26 +33,6 @@ const Client = () => {
         }
       ]
     },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      phone: "987-654-3210",
-      address: "456 Oak St",
-      city: "Othertown",
-      state: "TX",
-      zip: "67890",
-      orders: [
-        {
-          id: 3,
-          date: "2022-03-01",
-          total: 150.00,
-          products: [
-            { id: 4, name: "Product D", quantity: 3, price: 50.00 }
-          ]
-        }
-      ]
-    }
   ];
 
   return (

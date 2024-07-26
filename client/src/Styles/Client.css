@@ -1,66 +1,58 @@
 .client-container {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;  
     padding: 20px;
-    background-color: #f4f4f9;
+    width: 100%;
   }
   
+
   .client-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
     padding: 20px;
-    width:100%;
-    margin: 0 auto;
+    width: 100%;
   }
   
   .client-card h1 {
-    font-size: 1.8em;
+    font-size: 1.2em;
     margin-bottom: 10px;
-    color: #333;
+    color: #160C34;
   }
   
   .client-card p {
-    font-size: 1em;
-    color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 25px;
+    color: #271659;
+    font-size: 35px;
   }
   
-  .orders {
-    margin-top: 20px;
+
+  .client-card table {
+    width: 100%; 
+    border-collapse: collapse; 
   }
-  
-  .orders table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+  .client-card th{
+    color: #fff;
+    background:  #007bff;
   }
-  
-  .orders th, .orders td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+  .client-card th, .client-card td {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
     text-align: left;
   }
   
-  .orders th {
-    background-color: #f9f9f9;
-    color: #333;
+  .client-card th {
+    font-weight: bold; 
   }
   
-  .orders tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .orders ul {
+  .client-card ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
   
-  .orders li {
-    margin-bottom: 5px;
+  .client-card li {
+    margin-bottom: 3px;
   }
-  
- 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../Styles/Orders.css';
-
+import { Link } from 'react-router-dom';
 // Sample orders data for testing
 const orders = [
   {
@@ -76,7 +76,9 @@ const Orders = () => {
                 
                 <td className={`status ${order.status.toLowerCase()}`}>{order.status}</td>
                 <td>
-                  <button className="action-btn view">View</button>
+                <Link to={`/admin/client`}>
+                      <button className="action-btn view">View</button>
+                </Link>
                   <button className="action-btn cancel">Cancel</button>
                   <button className="action-btn track">Track</button>
                 </td>
