@@ -3,6 +3,10 @@ import sharp from "sharp";
 import path from "path";
 import multer from "multer";
 import { fileURLToPath } from 'url';
+import User from "../Models/User.model.js"
+import Cart from "../Models/Cart.model.js";
+import Order from "../Models/Order.model.js";
+
 
 // Utility to get directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -93,3 +97,102 @@ export const ModifyProduct = async (req, res, next) => {
         next(error);
     }
 }
+export const BuyProduct = async (req, res, next) => {
+    try {
+        // Get the cart ID from request params
+        const cart = await Cart.findById(req.params.cartid);
+        if (!cart) {
+            return res.status(404).json({ error: 'Cart not found' });
+        }
+
+        // Loop through each item in the cart to update product quantities
+        for (const item of cart.items) {
+            const product = await Product.findById(item.productId);
+            // Decrease the product quantity based on the cart item quantity
+            await Product.findByIdAndUpdate(product._id, { $inc: { quantity: -item.quantity } });
+        }
+
+        // Create a new order
+        const order = new Order({  userId: cart.userId,items:cart.items, totalprice: cart.totalprice });
+        await order.save();
+
+        // Delete the cart after purchase
+        await Cart.findByIdAndDelete(req.params.cartid);
+
+        // Return the order details
+        res.status(201).json({ message: 'Product ordered successfully', order });
+    } catch (error) {
+        next(error);
+    }
+};
+
+//Add product to panier 
+export const AddToCart = async (req, res, next) => {
+    try {
+        // Get the product by name
+        const product = await Product.findOne({ name: req.body.name });
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        // Check if the product quantity is enough
+        if (product.quantity < req.body.quantity) {
+            return res.status(400).json({ error: 'Not enough quantity' });
+        }
+
+        // Get the user ID from request body
+        const userId = req.params.userId;
+        if (!userId) {
+            return res.status(400).json({ error: 'User ID is required' });
+        }
+
+        // Check if the user exists
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Find or create the cart for the user
+        let cart = await Cart.findOne({ userId: userId });
+        if (!cart) {
+            cart = new Cart({ userId: userId, items: [], totalprice: 0 });
+        }
+
+        // Check if the product is already in the cart
+        const cartItem = cart.items.find(item => item.productId.equals(product._id));
+        if (cartItem) {
+            // Update the quantity of the existing item
+            cartItem.quantity += req.body.quantity;
+        } else {
+            // Add the new product to the cart
+            cart.items.push({
+                productId: product._id,
+                quantity: req.body.quantity,
+            });
+        }
+
+        // Update the total price
+        cart.totalprice += req.body.quantity * product.price;
+
+        // Save the updated cart
+        await cart.save();
+
+        // Update the product quantity
+        await Product.findByIdAndUpdate(product._id, { $inc: { quantity: -req.body.quantity } });
+
+        // Return a success message
+        res.status(201).json({ message: "Product added to the cart" });
+    } catch (error) {
+        next(error);
+    }
+};
+export const GetAllProducts = async (req, res, next) => {
+    try {
+    // Retrieve all products from the database
+    const products = await Product.find();
+    // Return all the products 
+    res.json(products);
+} catch (error) {
+    next(error);
+ }
+};
