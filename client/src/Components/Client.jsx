@@ -2,6 +2,7 @@ import React from 'react';
 import '../Styles/Client.css';
 
 const Client = () => {
+  //  data for testing
   const clients = [
     {
       id: 1,

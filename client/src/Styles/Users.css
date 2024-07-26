@@ -1,0 +1,44 @@
+.Users{
+    background-color: #CBD2E5;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    overflow-y: scroll;
+}
+.Users-table {
+    width: 100%;
+    border-collapse: collapse;
+    height: 98%;
+    margin: 0.5%;
+    overflow: hidden;
+  }
+  .Users-table th, .Users-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: 1.3rem;
+  }
+  .Users-table th, .Users-table tr {
+    background-color: #f2f2f2;
+  }
+  .Users-table tr{
+    background-color: #fff;
+  }
+  .Users-table th {
+    background-color: #007bff;
+    color: white;
+  }
+  .delete-button:hover {
+    background-color: #C0392B;
+  }
+  .delete-button {
+    background-color: #E74C3C; 
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100px;
+
+  }
