@@ -167,7 +167,7 @@ const Users = () => {
               <td>{user.city}</td>
               <td>{user.state}</td>
               <td>
-              <button className="delete-button">Delete</button>
+              <button className="delete-butt">Delete</button>
             </td>
             </tr>
           ))}
