@@ -17,9 +17,9 @@ export const login = async(req,res,next)=>{
             if(!validPassword){
                 return next(ErrorHandler(400,"Invalid credentials"))
             }
-            const mytoken = generateTokenAndSerCookies(user._id,res)
+            const mytoken = generateTokenAndSerCookies(user._id,user.role,res)
             res.cookie("token",mytoken,{httpOnly:true})
-            res.status(200).json({user,message:"user logged in successfully"})
+            res.status(200).json({message:"user logged in successfully",stToken:mytoken})
                 }
         catch (error) {
             next(error);
@@ -78,8 +78,6 @@ export const UpdateUser = async (req, res, next) => {
     }
 };
 
-<<<<<<< HEAD
-
 export const createUser = async (req,res) => {
     try {
         const {full_name,email,password} = req.body
@@ -91,14 +89,14 @@ export const createUser = async (req,res) => {
         const hashedPassword = await bcryptjs.hash(password,10)
         const newUser = new User({full_name,email,password:hashedPassword,profile_pic:pdp,role:"user"})
         await newUser.save()
-        generateTokenAndSerCookies(newUser._id,res)
-        res.status(201).json({message:"User created successfully",thistoken:generateTokenAndSerCookies(newUser._id,res)})
+        const token = generateTokenAndSerCookies(newUser._id,newUser.role,res);
+        res.status(201).json({message:"User created successfully",stToken:token})
     } catch (error) {
         console.log("error in createUser Function",error)
         res.status(500).json({error:"Internal server error"})
     }
 }
-=======
+
 //show all users 
     export const getAllUsers = async (req, res, next) => {
     try {
@@ -108,4 +106,4 @@ export const createUser = async (req,res) => {
         next(error);
     }
 };
->>>>>>> 4da60b23a9884a33999ee10bc0de1f1b938733b6
+
