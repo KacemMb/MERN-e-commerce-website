@@ -28,7 +28,7 @@ export const AddProduct = async (req, res, next) => {
 
         // Compress the image using sharp
         const compressedImageName = `${req.file.originalname.split('.')[0]}-compressed.jpeg`;
-        const compressedImagePath = path.join( 'images', compressedImageName);
+        const compressedImagePath = path.join( './Images', compressedImageName);
 
         await sharp(imageBuffer)
             .resize(500, 500)

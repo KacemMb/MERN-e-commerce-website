@@ -1,3 +1,35 @@
 .AdminDashboard{
     display: flex;
 }
+
+@media screen and (max-width: 431px){
+    .AdminDashboard{
+        flex-direction: column;
+    }
+    .SideBar{
+        display: none;
+    }
+    .AddProduct{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+    }
+    .AddProductForm{
+        width: 100%;
+    }
+    .Form1{
+        width: 100%;
+    }
+    .ProductProto{
+        width: 100%;
+        margin: 0;
+
+    }
+
+    .Show_Products{
+        width: 100%;
+        margin: 0;
+        height: 100%;
+    }
+}

@@ -2,26 +2,12 @@ import User from "../Models/User.model.js"
 import bcryptjs from "bcryptjs"
 import  jwt  from "jsonwebtoken"
 import sharp from "sharp"
-export const signup = async (req, res,next) => {
-    try {
-    const { full_name, email, password } = req.body;
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-        return res.status(400).json({ error: 'User already exists' });
-        }
-        const hashedPassword = await bcryptjs.hash(password, 10);
-        const newuser = new User({ full_name,email, password: hashedPassword });
-        if(newuser.role=="admin"){
-            next(ErrorHandler(403,"you can't create an admin account"))
-        }
-        await newuser.save();
-        res.status(201).json({ message: 'User registered successfully' });
-        } catch (error) {
-next(error)      
-  }
-        }
-        export const login = async(req,res,next)=>{
-            const {email,password} =req.body
+import generateTokenAndSerCookies from "../Utils/JWTgenerator.js"
+
+
+
+export const login = async(req,res,next)=>{
+        const {email,password} =req.body
         try {
             const user =await User.findOne({email})
             if(!user){
@@ -31,11 +17,8 @@ next(error)
             if(!validPassword){
                 return next(ErrorHandler(400,"Invalid credentials"))
             }
-            const token=jwt.sign(
-                {id:user._id},
-                process.env.JWT_SECRET
-            )
-            res.cookie("token",token,{httpOnly:true,})
+            const mytoken = generateTokenAndSerCookies(user._id,res)
+            res.cookie("token",mytoken,{httpOnly:true})
             res.status(200).json({user,message:"user logged in successfully"})
                 }
         catch (error) {
@@ -43,7 +26,7 @@ next(error)
         }
         
         }
-        export const logout = async(req,res,next)=>{
+export const logout = async(req,res,next)=>{
             try {
                 res.clearCookie("token")
                 res.status(200).json({message:"user logged out successfully"})
@@ -94,3 +77,23 @@ export const UpdateUser = async (req, res, next) => {
         next(error);
     }
 };
+
+
+export const createUser = async (req,res) => {
+    try {
+        const {full_name,email,password} = req.body
+        const pdp = `https://avatar.iran.liara.run/public/boy?username=${full_name}`
+        const findUser = await User.findOne({email})
+        if(findUser){
+            return res.status(400).json({error:"User already exists"})
+        }
+        const hashedPassword = await bcryptjs.hash(password,10)
+        const newUser = new User({full_name,email,password:hashedPassword,profile_pic:pdp,role:"user"})
+        await newUser.save()
+        generateTokenAndSerCookies(newUser._id,res)
+        res.status(201).json({message:"User created successfully",thistoken:generateTokenAndSerCookies(newUser._id,res)})
+    } catch (error) {
+        console.log("error in createUser Function",error)
+        res.status(500).json({error:"Internal server error"})
+    }
+}

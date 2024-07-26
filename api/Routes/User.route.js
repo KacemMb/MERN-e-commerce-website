@@ -1,9 +1,9 @@
 import express from 'express'
-import { signup, login, logout, UpdateUser } from '../Controllers/User.controller.js'
+import {login, logout, UpdateUser, createUser } from '../Controllers/User.controller.js'
 
 const UserRoute = express.Router()
 
- UserRoute.post('/signup',signup)
+ UserRoute.post('/signup',createUser)
  UserRoute.post('/login', login)
  UserRoute.post('/logout',logout)
  UserRoute.post('/update',UpdateUser)
