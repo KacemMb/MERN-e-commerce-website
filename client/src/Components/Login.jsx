@@ -8,6 +8,9 @@ const Login = () => {
     email: '',
     password: ''
   })
+  const [loading, setLoading] = useState(false)
+
+  
 
   const handleChange = (e) => {
     setData({
@@ -25,7 +28,11 @@ const Login = () => {
   const sentData = async () => {
     try {
       const res = await axios.post('http://localhost:2024/api/user/login', data)
-    console.log(res.data)
+      if(res){
+        toast.success("signed in successfully")
+        localStorage.setItem('stToken', res.data.stToken)
+      }
+      
       
     } catch (error) {
       console.log(error)
@@ -33,17 +40,20 @@ const Login = () => {
   }
 
   const handleSubmit = (e) => {
+    setLoading(true)
     if (!isEmailValid(data.email)) {
       toast.error('Invalid Email')
+      setLoading(false)
       return
     }
     if (!isPasswordValid(data.password)) {
       toast.error('Invalid Password')
+      setLoading(false)
       return
     }
-    console.log(data)
+    
     sentData()
-    toast.success('Login success')
+    setLoading(false)
   }
   return (
     <div className='Login'>
@@ -52,7 +62,7 @@ const Login = () => {
         <input type="password" name='password' placeholder='Password' className='auth-input' onChange={handleChange}/>
       </div>
       <div className="btnandforget">
-        <button className='auth-btn' onClick={handleSubmit}>Login</button>
+        <button className='auth-btn' onClick={handleSubmit}>{loading ? <div className='loader'></div> : 'Login'}</button>
         <p className='auth-p'>forget Password</p>
       </div>
       

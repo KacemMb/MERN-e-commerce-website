@@ -11,6 +11,8 @@ const Signup = () => {
     repassword: ''
   })
 
+  const [loading, setLoading] = useState(false)
+
   const handleChange = (e) => {
     setData({
       ...data,
@@ -28,7 +30,9 @@ const Signup = () => {
   }
 
   const sentData = async () => {
+    
     try {
+      setLoading(true)
       const full_name = data.username;
       const email = data.email;
       const password = data.password;
@@ -41,8 +45,9 @@ const Signup = () => {
       if(res){
         toast.success("signed Up successfully")
         console.log(res.data)
+        
       }
-      
+      setLoading(false)
     } catch (error) {
       console.log("error in sentData Function",error)
     }
@@ -71,7 +76,7 @@ const Signup = () => {
         <input type="password" placeholder='Password' name='password' className='auth-input'  onChange={handleChange}/>
         <input type="password" placeholder='Re_Password' name='repassword' className='auth-input' onChange={handleChange}/>
       </div>
-      <button className='auth-btn' onClick={handleSubmit}>SignUp</button>
+      <button className='auth-btn' onClick={handleSubmit}>{loading ? <div className='loader'></div> : 'Signup'}</button>
     </div>
   )
 }
