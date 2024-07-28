@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
 import '../Styles/Products.css';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchProducts , deleteProduct} from '../Actions/products';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts, deleteProduct } from '../Slices/ProductsSlice';
 
-const Products = ({ productsData, fetchProducts , deleteProduct }) => {
+const Products = () => {
+  const dispatch = useDispatch();
+  const productsData = useSelector((state) => state.products);
+
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   const handleDelete = (id) => {
     deleteProduct(id);
@@ -54,12 +57,6 @@ const Products = ({ productsData, fetchProducts , deleteProduct }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  productsData: state.products
-});
 
-const mapDispatchToProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchProducts())
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default Products;

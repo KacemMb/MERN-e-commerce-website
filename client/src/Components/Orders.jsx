@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import '../Styles/Orders.css';
-import { connect } from 'react-redux';
-import { fetchOrders, fetchOrderDetails } from '../Actions/orders';
 import { Link } from 'react-router-dom';
-
-const Orders = ({ ordersData, fetchOrders, fetchOrderDetails }) => {
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchOrders, fetchOrderDetails } from '../Slices/OrdersSlice';
+const Orders = () => {
   const [filter, setFilter] = useState('all');
+  const dispatch = useDispatch();
+  const ordersData = useSelector((state) => state.orders);
 
   useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
+    dispatch(fetchOrders());
+  }, [dispatch]);
 
   const getUsername = (orderId) => {
     const order = ordersData.orders.find(order => order._id === orderId);
@@ -28,13 +29,13 @@ const Orders = ({ ordersData, fetchOrders, fetchOrderDetails }) => {
     ? (filter === 'all' ? ordersData.orders : ordersData.orders.filter(order => order && order.status && order.status.toLowerCase() === filter))
     : [];
 
-  useEffect(() => {
-    filteredOrders.forEach(order => {
-      if (!order.user) {
-        fetchOrderDetails(order._id);
-      }
-    });
-  }, [filteredOrders, fetchOrderDetails]);
+    useEffect(() => {
+      filteredOrders.forEach(order => {
+        if (!order.user) {
+          dispatch(fetchOrderDetails(order._id));
+        }
+      });
+    }, [filteredOrders, dispatch]);
 
   if (ordersData.loading) return <div>Loading...</div>;
   if (ordersData.error) return <div>Error: {ordersData.error}</div>;
@@ -91,13 +92,4 @@ const Orders = ({ ordersData, fetchOrders, fetchOrderDetails }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  ordersData: state.orders,
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchOrders: () => dispatch(fetchOrders()),
-  fetchOrderDetails: (orderId) => dispatch(fetchOrderDetails(orderId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Orders);
+export default Orders;

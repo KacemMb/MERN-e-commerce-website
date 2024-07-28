@@ -1,12 +1,16 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchUsers ,deleteUser } from '../Actions/users';
 import '../Styles/Users.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUsers, deleteUser } from '../Slices/UsersSlice';
+const Users = () => {
+  const dispatch = useDispatch();
 
-const Users = ({ usersData, fetchUsers,deleteUser }) => {
+  const usersData = useSelector((state) => state.users);
+
   useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
   const handleDelete = (id) => {
     deleteUser(id);
   };
@@ -50,12 +54,4 @@ const Users = ({ usersData, fetchUsers,deleteUser }) => {
   );
 }
 
-const mapStateToProps = state => ({
-  usersData: state.users
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchUsers: () => dispatch(fetchUsers())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default Users;
