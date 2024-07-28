@@ -75,7 +75,7 @@ const Orders = ({ ordersData, fetchOrders, fetchOrderDetails }) => {
                   <td>{formatDate(order.date)}</td>
                   <td className={`status ${order.status.toLowerCase()}`}>{order.status}</td>
                   <td>
-                    <Link to={`/admin/client`}>
+                    <Link to={`/admin/client/${order._id}`}>
                       <button className="action-btn view">View</button>
                     </Link>
                     <button className="action-btn cancel">Cancel</button>
