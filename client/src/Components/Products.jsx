@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import '../Styles/Products.css';
 import { Link } from 'react-router-dom';
-//Data for testing
-const Products = ({products}) => {
- 
+import { connect } from 'react-redux';
+import { fetchProducts } from '../Actions/products';
+const Products = ({products, productsData, fetchProducts }) => {
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  if (productsData.loading) return <div>Loading...</div>;
+  if (productsData.error) return <div>Error: {productsData.error}</div>;
   return (
   <div className='Products'>
     <table className="product-table">
@@ -43,5 +49,12 @@ const Products = ({products}) => {
    </div>
    );  
 };
+const mapStateToProps = state => ({
+  productsData: state.products
+});
 
-export default Products;
+const mapDispatchToProps = dispatch => ({
+  fetchProducts: () => dispatch(fetchProducts())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

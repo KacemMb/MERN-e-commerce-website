@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import '../Styles/Orders.css';
+import { connect } from 'react-redux';
+import { fetchOrders } from '../Actions/orders';
 import { Link } from 'react-router-dom';
 // Sample orders data for testing
 const orders = [
@@ -34,11 +36,15 @@ const orders = [
     },
 ];
 
-const Orders = () => {
+const Orders = ({ ordersData, fetchOrders }) => {
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
   const [filter, setFilter] = useState('all');
 
   const filteredOrders = filter === 'all' ? orders : orders.filter(order => order.status.toLowerCase() === filter);
-
+  if (ordersData.loading) return <div>Loading...</div>;
+  if (ordersData.error) return <div>Error: {ordersData.error}</div>;
   return (
     <div className='container'>
       <div className="orders-container">
@@ -91,8 +97,14 @@ const Orders = () => {
     </div>
   );
 };
+const mapStateToProps = state => ({
+  ordersData: state.orders
+});
 
-export default Orders;
+const mapDispatchToProps = dispatch => ({
+  fetchOrders: () => dispatch(fetchOrders())
+});
+export default connect(mapStateToProps, mapDispatchToProps) (Orders);
 
 
 

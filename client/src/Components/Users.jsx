@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchUsers } from '../Actions/users';
 import '../Styles/Users.css';
 
-const Users = () => {
+const Users = ({ usersData, fetchUsers }) => {
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  if (usersData.loading) return <div>Loading...</div>;
+  if (usersData.error) return <div>Error: {usersData.error}</div>;
+
     //  data for testing
   const users = [
     {
@@ -177,4 +186,12 @@ const Users = () => {
   );
 }
 
-export default Users;
+const mapStateToProps = state => ({
+  usersData: state.users
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchUsers: () => dispatch(fetchUsers())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);
