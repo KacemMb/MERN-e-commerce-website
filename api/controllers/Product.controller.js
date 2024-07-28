@@ -196,3 +196,14 @@ export const GetAllProducts = async (req, res, next) => {
     next(error);
  }
 };
+//get all orders only for admin 
+export const GetAllOrders = async (req, res, next) => {
+    try {
+        // Retrieve all orders from the database
+        const orders = await Order.find();
+        // Return all the orders
+        res.json(orders);
+    } catch (error) {
+        next(error);
+    }
+};
