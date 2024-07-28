@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchUsers } from '../Actions/users';
+import { fetchUsers ,deleteUser } from '../Actions/users';
 import '../Styles/Users.css';
 
-const Users = ({ usersData, fetchUsers }) => {
+const Users = ({ usersData, fetchUsers,deleteUser }) => {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
-
+  const handleDelete = (id) => {
+    deleteUser(id);
+  };
   if (usersData.loading) return <div>Loading...</div>;
   if (usersData.error) return <div>Error: {usersData.error}</div>;
 
@@ -38,7 +40,7 @@ const Users = ({ usersData, fetchUsers }) => {
               <td>{user.city}</td>
               <td>{user.state}</td>
               <td>
-              <button className="delete-butt">Delete</button>
+              <button className="delete-butt"  onClick={() => handleDelete(user._id)}>Delete</button>
             </td>
             </tr>
           ))}
