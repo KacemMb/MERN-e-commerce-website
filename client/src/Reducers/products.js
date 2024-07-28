@@ -1,4 +1,4 @@
-import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from '../Actions/products';
+import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE,DELETE_PRODUCT_REQUEST, DELETE_PRODUCT_SUCCESS, DELETE_PRODUCT_FAILURE } from '../Actions/products';
 
 const initialState = {
   loading: false,
@@ -25,6 +25,17 @@ const productsReducer = (state = initialState, action) => {
         products: [],
         error: action.payload
       };
+      case DELETE_PRODUCT_REQUEST:
+      return { ...state, loading: true };
+    case DELETE_PRODUCT_SUCCESS:
+      return { 
+        ...state, 
+        loading: false, 
+        products: state.products.filter(product => product._id !== action.payload),
+        error: '' 
+      };
+    case DELETE_PRODUCT_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

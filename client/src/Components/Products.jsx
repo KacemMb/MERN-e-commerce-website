@@ -2,13 +2,16 @@ import React, { useEffect } from 'react';
 import '../Styles/Products.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../Actions/products';
+import { fetchProducts , deleteProduct} from '../Actions/products';
 
-const Products = ({ productsData, fetchProducts }) => {
+const Products = ({ productsData, fetchProducts , deleteProduct }) => {
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
-  
+
+  const handleDelete = (id) => {
+    deleteProduct(id);
+  };
   if (productsData.loading) return <div>Loading...</div>;
   if (productsData.error) return <div>Error: {productsData.error}</div>;
 
@@ -41,7 +44,7 @@ const Products = ({ productsData, fetchProducts }) => {
                 <Link to={`/admin/update/${product._id}`}>
                   <button className="modify-button">Modify</button>
                 </Link>
-                <button className="delete-button">Delete</button>
+                <button className="delete-button"  onClick={() => handleDelete(product._id)}>Delete</button>
               </td>
             </tr>
           ))}
