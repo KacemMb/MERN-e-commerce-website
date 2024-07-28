@@ -1,29 +1,42 @@
-import { FETCH_ORDERS_REQUEST, FETCH_ORDERS_SUCCESS, FETCH_ORDERS_FAILURE } from '../Actions/orders';
+import { FETCH_ORDERS_REQUEST, FETCH_ORDERS_SUCCESS, FETCH_ORDERS_FAILURE,FETCH_ORDER_DETAILS_SUCCESS } from '../Actions/orders';
 
 const initialState = {
   loading: false,
   orders: [],
-  error: ''
+  error: '',
 };
 
 const ordersReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_ORDERS_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case FETCH_ORDERS_SUCCESS:
       return {
+        ...state,
         loading: false,
         orders: action.payload,
-        error: ''
+        error: '',
       };
     case FETCH_ORDERS_FAILURE:
       return {
+        ...state,
         loading: false,
         orders: [],
-        error: action.payload
+        error: action.payload,
+      };
+    case FETCH_ORDER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        orders: state.orders.map(order =>
+          order._id === action.payload.orderId
+            ? { ...order, ...action.payload.orderDetails }
+            : order
+        ),
+        error: '',
       };
     default:
       return state;
