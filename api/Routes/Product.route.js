@@ -8,6 +8,6 @@ Product_route.post('/ModifyProduct/:id',ModifyProduct)
 Product_route.get('/GetAllProducts',GetAllProducts)
 Product_route.post('/AddToCart/:userId',AddToCart)
 Product_route.post('/BuyProduct/:cartid',BuyProduct)
-Product_route.post('/GetAllOrders',GetAllOrders)
+Product_route.get('/GetAllOrders',GetAllOrders)
 
 export default Product_route
