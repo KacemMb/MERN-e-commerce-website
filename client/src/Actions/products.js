@@ -21,7 +21,7 @@ export const fetchProductsFailure = (error) => ({
 export const fetchProducts = () => {
   return (dispatch) => {
     dispatch(fetchProductsRequest());
-    axios.get('http://localhost:2024/api/GetAllProducts')
+    axios.get('http://localhost:2024/api/product/GetAllProducts')
       .then(response => {
         dispatch(fetchProductsSuccess(response.data));
       })

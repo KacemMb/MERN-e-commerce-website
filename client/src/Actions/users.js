@@ -21,7 +21,7 @@ export const fetchUsersFailure = (error) => ({
 export const fetchUsers = () => {
   return (dispatch) => {
     dispatch(fetchUsersRequest());
-    axios.get('http://localhost:2024/api/getall')
+    axios.get('http://localhost:2024/api/user/getall')
       .then(response => {
         dispatch(fetchUsersSuccess(response.data));
       })
