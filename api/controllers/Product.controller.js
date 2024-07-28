@@ -207,3 +207,19 @@ export const GetAllOrders = async (req, res, next) => {
         next(error);
     }
 };
+//GetOrderDetails that takes the ids from the order data find them and return the username from the user id 
+
+export const GetOrderDetails = async (req, res, next) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ error: 'Order not found' });
+
+        const user = await User.findById(order.userId);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+
+        // Return both order details and user info
+        return res.status(200).json({ order, user });
+    } catch (error) {
+        next(error);
+    }
+};
