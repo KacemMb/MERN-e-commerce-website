@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Async thunk for fetching users
-export const fetchUsers = createAsyncThunk('http://localhost:2024/api/user/GetAll', async () => {
-  const response = await axios.get('/api/users');
+export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
+  const response = await axios.get('http://localhost:2024/api/user/getall');
   return response.data;
 });
 
 // Async thunk for deleting a user
-export const deleteUser = createAsyncThunk('http://localhost:2024/api/user/DeleteUser', async (userId) => {
-  await axios.delete(`/api/users/${userId}`);
+export const deleteUser = createAsyncThunk('users/deleteUser', async (userId) => {
+  await axios.delete(`http://localhost:2024/api/user/DeleteUser/${userId}`);
   return userId;
 });
 
