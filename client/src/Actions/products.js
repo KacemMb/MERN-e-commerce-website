@@ -1,9 +1,11 @@
 import axios from 'axios';
-
+// Action Types
 export const FETCH_PRODUCTS_REQUEST = 'FETCH_PRODUCTS_REQUEST';
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
 export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
 
+
+// Action Creators
 export const fetchProductsRequest = () => ({
   type: FETCH_PRODUCTS_REQUEST
 });
@@ -18,15 +20,17 @@ export const fetchProductsFailure = (error) => ({
   payload: error
 });
 
+
+// Thunk Actions
 export const fetchProducts = () => {
-  return (dispatch) => {
+  return async dispatch => {
     dispatch(fetchProductsRequest());
-    axios.get('http://localhost:2024/api/product/GetAllProducts')
-      .then(response => {
-        dispatch(fetchProductsSuccess(response.data));
-      })
-      .catch(error => {
-        dispatch(fetchProductsFailure(error.message));
-      });
+    try {
+      const response = await axios.get('http://localhost:2024/api/product/GetAllProducts')
+      dispatch(fetchProductsSuccess(response.data));
+    } catch (error) {
+      dispatch(fetchProductsFailure(error.message));
+    }
   };
 };
+

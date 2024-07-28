@@ -3,11 +3,15 @@ import '../Styles/Products.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../Actions/products';
-const Products = ({products, productsData, fetchProducts }) => {
+const Products = ({ productsData, fetchProducts }) => {
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
-
+  const getUsername = (productId) => {
+    const product = productsData.products.find(product => product._id === productId);
+    return product && product.user ? product.user.full_name : '';
+  };
+  
   if (productsData.loading) return <div>Loading...</div>;
   if (productsData.error) return <div>Error: {productsData.error}</div>;
   return (
@@ -26,7 +30,7 @@ const Products = ({products, productsData, fetchProducts }) => {
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
+        {productsData.map((product) => (
           <tr key={product.id}>
             <td>{product.id}</td>
             <td>{product.name}</td>
