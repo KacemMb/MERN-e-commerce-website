@@ -1,9 +1,12 @@
 import React from 'react'
+import FeedBack from './FeedBack';
+import '../Styles/FeedBacks.css';
 
 const FeedBacks = () => {
   return (
-    <div>
-      
+    <div className='FeedBacks'>
+     <FeedBack/>
+     <FeedBack/>
     </div>
   )
 }
