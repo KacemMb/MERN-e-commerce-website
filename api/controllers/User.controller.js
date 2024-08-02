@@ -107,3 +107,18 @@ export const createUser = async (req,res) => {
     }
 };
 
+export const deleteUser = async (req,res) => {
+    try {
+        const user_id = req.params.id
+        const user = User.findOne({_id:user_id})
+        if(!user){
+           return res.status(400).json({"error" : "user not found"})
+        }
+        User.findOneAndDelete({_id : user_id})
+        res.status(202).json({message : "user deleted succesfully"})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({"error" : "server error"})
+    }
+}

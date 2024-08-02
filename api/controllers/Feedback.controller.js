@@ -40,4 +40,30 @@ export const AddFeedback = async(req,res,next)=>{
         next(error);//don't know if the nex here is necessary if nor i wil replace it
     }
 }
+
+export const getAllFeedbacks = async (req,res) =>{
+    try {
+        const feedbacks = await Feedback.find()
+        res.status(200).json(feedbacks)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message: "Server error"})
+    }
+} 
+
+export const deleteFeedback = async (req,res) =>{
+    try {
+        const id = req.params.id
+        const feedback = await Feedback.findById(id)
+        if(!feedback){
+            res.status(404).json({message: "Feedback not found"})
+        }
+        await feedback.remove()
+        res.status(200).json({message: "Feedback deleted successfully"})
         
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({"error": "Server error"})
+    }
+}
+         

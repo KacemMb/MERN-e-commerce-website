@@ -223,3 +223,19 @@ export const GetOrderDetails = async (req, res, next) => {
         next(error);
     }
 };
+
+export const deleteProduct = async (req,res) =>{
+    try {
+        const prod_id = req.params.id;
+        const prod = await Product.findOne({_id:prod_id})
+        if(!prod){
+            return res.status(404).json({error:"Product not found"})
+        }
+        await Product.findByIdAndDelete(prod_id)
+        res.status(200).json({message:"Product deleted successfully"})
+        
+    } catch (error) {
+        console.log("error in delete product : ",error)
+        res.status(500).json({error:"Internal server error"})
+    }
+}

@@ -4,6 +4,7 @@ import Product_route from './Routes/Product.route.js';
 import UserRoute from './Routes/User.route.js';
 import cors from 'cors';
 import connectDB from './DB/Connection.js';
+import feedRoute from './Routes/FeedBack.route.js';
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ const port = process.env.PORT || 3000
 connectDB()
 app.use('/api/product',Product_route)
 app.use('/api/user',UserRoute)
+app.use('/api/feedbacks',feedRoute)
 app.listen(port, () => {
   console.log(`server running on port ${port}` );
 });
