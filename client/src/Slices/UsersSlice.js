@@ -9,7 +9,7 @@ export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
 
 // Async thunk for deleting a user
 export const deleteUser = createAsyncThunk('users/deleteUser', async (userId) => {
-  await axios.delete(`http://localhost:2024/api/user/DeleteUser/${userId}`);
+  await axios.delete(`http://localhost:2024/api/user/delete/${userId}`);
   return userId;
 });
 

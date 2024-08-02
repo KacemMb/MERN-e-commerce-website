@@ -3,13 +3,13 @@ import axios from 'axios';
 
 // Async thunk for fetching feedbacks
 export const fetchFeedbacks = createAsyncThunk('feedbacks/fetchFeedbacks', async () => {
-  const response = await axios.get('http://localhost:2024/api/feedback/GetAllFeedbacks');
+  const response = await axios.get('http://localhost:2024/api/feedback/getallfeed');
   return response.data;
 });
 
 // Async thunk for deleting a comment
 export const deleteFeedback = createAsyncThunk('feedbacks/deleteFeedback', async (id) => {
-  await axios.delete(`http://localhost:2024/api/feedback/Deletefeedback/${id}`);
+  await axios.delete(`http://localhost:2024/api/feedback/deleteFeed/${id}`);
   return id;
 });
 
