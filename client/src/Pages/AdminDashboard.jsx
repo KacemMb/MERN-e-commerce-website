@@ -36,8 +36,7 @@ const AdminDashboard = () => {
       <Routes>
         <Route path='/' element={<AddProduct />} />
         <Route path='/product' element={<Products products={products} />} />
-        <Route path='/update' element={<ModifyProduct products={products} />} />
-        <Route path='/modify/:id' element={<ModifyProduct products={products} />} />
+        <Route path='/update/:id' element={<ModifyProduct products={products} />} />
         <Route path='/orders' element={<Orders />} />
         <Route path='/client' element={<Client/>} />
         <Route path='/users' element={<Users />} />
