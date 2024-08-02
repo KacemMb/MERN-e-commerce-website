@@ -1,5 +1,5 @@
 import express from 'express'
-import { deleteFeedback, getAllFeedbacks } from '../Controllers/Feedback.controller'
+import { deleteFeedback, getAllFeedbacks } from '../controllers/Feedback.controller.js'
 
 const feedRoute = express.Router()
 
